@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="list"></div>
+<table id="table"></table>
+
+<script>
+    'use strict';
+
+    /*create list*/
+    function generateList(array) {
+        let ul = document.createElement('ul');
+
+        document.getElementById('list').appendChild(ul);
+
+        array.forEach(function(el) {
+            let li = document.createElement('li');
+
+            if (Array.isArray(el)) {
+                li.appendChild(generateList(el));
+            } else {
+                li.appendChild(document.createTextNode(el));
+            }
+
+            ul.appendChild(li);
+        });
+
+        return ul;
+    }
+
+    generateList([1,2, [1.1,1.2,1.3], 3]);
+
+    /*table 10x10*/
+    function createTable() {
+        let table = document.getElementById('table');
+
+        for (let i = 0; i < 10; i++) {
+            let row = document.createElement('tr');
+
+            for (let j = 0; j < 10; j++) {
+                let col = document.createElement('td');
+
+                col.appendChild(document.createTextNode((i * 10) + j + 1));
+                row.appendChild(col);
+            }
+
+            table.appendChild(row);
+        }
+    }
+
+    createTable()
+
+</script>
+
+</body>
+</html>
